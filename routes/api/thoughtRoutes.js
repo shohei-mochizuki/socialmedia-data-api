@@ -1,16 +1,19 @@
 const router = require('express').Router();
 const {
-  getApplications,
+  getThoughts,
   getSingleApplication,
-  createApplication,
+  createThought,
   updateApplication,
   deleteApplication,
   addTag,
   removeTag,
-} = require('../../controllers/appController');
+} = require('../../controllers/thoughtController');
 
-// /api/applications
-router.route('/').get(getApplications).post(createApplication);
+// /api/thoughts
+router
+  .route('/')
+  .get(getThoughts)
+  .post(createThought);
 
 // /api/applications/:applicationId
 router
