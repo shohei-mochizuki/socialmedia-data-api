@@ -80,7 +80,7 @@ module.exports = {
   addReaction(req, res) { // /api/thoughts/:thoughtId/reactions
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $addToSet: { tags: req.body } },
+      { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
@@ -92,15 +92,15 @@ module.exports = {
   },
   
   removeReaction(req, res) { // /api/thoughts/:thoughtId/reactions/:reactionId
-    Application.findOneAndUpdate(
-      { _id: req.params.applicationId },
-      { $pull: { tags: { tagId: req.params.tagId } } },
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
-      .then((application) =>
-        !application
-          ? res.status(404).json({ message: 'No application with this id!' })
-          : res.json(application)
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought found with this id' })
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
