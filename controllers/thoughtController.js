@@ -1,12 +1,13 @@
 const { Thought, User } = require('../models');
 
 module.exports = {
-  getThoughts(req, res) {
+  getThoughts(req, res) { // /api/thoughts
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
-  getSingleThought(req, res) {
+
+  getSingleThought(req, res) { // /api/thoughts/:thoughtId
     Thought.findOne({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
@@ -16,7 +17,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   
-  createThought(req, res) {
+  createThought(req, res) { // /api/thoughts
     Thought.create(req.body)
       .then((thought) => {
         return User.findOneAndUpdate(
@@ -38,25 +39,25 @@ module.exports = {
       });
   },
   
-  updateApplication(req, res) {
-    Application.findOneAndUpdate(
-      { _id: req.params.applicationId },
+  updateThought(req, res) { // /api/thoughts/:thoughtId
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
       { $set: req.body },
       { runValidators: true, new: true }
     )
-      .then((application) =>
-        !application
-          ? res.status(404).json({ message: 'No application with this id!' })
-          : res.json(application)
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought found with this id' })
+          : res.json(thought)
       )
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
   },
-  // TODO: Add comments to the functionality of the deleteApplication method
-  deleteApplication(req, res) {
-    Application.findOneAndRemove({ _id: req.params.applicationId })
+
+  deleteThought(req, res) { // /api/thoughts/:thoughtId
+    Thought.findOneAndRemove({ _id: req.params.applicationId })
       .then((application) =>
         !application
           ? res.status(404).json({ message: 'No application with this id!' })
