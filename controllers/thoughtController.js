@@ -57,27 +57,27 @@ module.exports = {
   },
 
   deleteThought(req, res) { // /api/thoughts/:thoughtId
-    Thought.findOneAndRemove({ _id: req.params.applicationId })
-      .then((application) =>
-        !application
-          ? res.status(404).json({ message: 'No application with this id!' })
+    Thought.findOneAndRemove({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought found with this id' })
           : User.findOneAndUpdate(
-              { applications: req.params.applicationId },
-              { $pull: { applications: req.params.applicationId } },
+              { thoughts: req.params.thoughtId },
+              { $pull: { thoughts: req.params.thoughtId } },
               { new: true }
             )
       )
       .then((user) =>
         !user
           ? res.status(404).json({
-              message: 'Application created but no user with this id!',
+              message: 'Thought created but no user found with this id',
             })
-          : res.json({ message: 'Application successfully deleted!' })
+          : res.json({ message: 'Thought successfully deleted!' })
       )
       .catch((err) => res.status(500).json(err));
   },
-  // TODO: Add comments to the functionality of the addTag method
-  addTag(req, res) {
+  
+  addReaction(req, res) {
     Application.findOneAndUpdate(
       { _id: req.params.applicationId },
       { $addToSet: { tags: req.body } },
@@ -90,8 +90,8 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // TODO: Add comments to the functionality of the addTag method
-  removeTag(req, res) {
+  
+  removeReaction(req, res) {
     Application.findOneAndUpdate(
       { _id: req.params.applicationId },
       { $pull: { tags: { tagId: req.params.tagId } } },
