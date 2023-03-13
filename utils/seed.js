@@ -1,12 +1,12 @@
 const connection = require('../config/connection');
-const { User, Application } = require('../models');
+const { User, Thought } = require('../models');
 const { getRandomName, getRandomApplications } = require('./data');
 
 connection.on('error', (err) => err);
 
 connection.once('open', async () => {
   console.log('connected');
-  await Application.deleteMany({});
+  await Thought.deleteMany({});
   await User.deleteMany({});
 
   const users = [];
