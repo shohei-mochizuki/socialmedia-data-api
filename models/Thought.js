@@ -1,21 +1,19 @@
 const { Schema, model } = require('mongoose');
 
-// Schema to create User model
-const userSchema = new Schema(
+// Schema to create Thought model
+const thoughtSchema = new Schema(
   {
-    username: {
+    thoughtText: {
       type: String,
       required: true,
-      unique: true,
-      trim: true,
+      minLength: 1,
+      maxLength: 280,
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/i
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
-    thoughts: [
+    username: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Thought',
