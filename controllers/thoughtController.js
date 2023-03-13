@@ -1,43 +1,43 @@
-const { Application, User } = require('../models');
+const { Thought, User } = require('../models');
 
 module.exports = {
-  getApplications(req, res) {
-    Application.find()
-      .then((applications) => res.json(applications))
+  getThoughts(req, res) {
+    Thought.find()
+      .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
-  getSingleApplication(req, res) {
-    Application.findOne({ _id: req.params.applicationId })
-      .then((application) =>
-        !application
-          ? res.status(404).json({ message: 'No application with that ID' })
-          : res.json(application)
+  getSingleThought(req, res) {
+    Thought.findOne({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought found with that ID' })
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
-  // TODO: Add comments to the functionality of the createApplication method
-  createApplication(req, res) {
-    Application.create(req.body)
-      .then((application) => {
+  
+  createThought(req, res) {
+    Thought.create(req.body)
+      .then((thought) => {
         return User.findOneAndUpdate(
           { _id: req.body.userId },
-          { $addToSet: { applications: application._id } },
+          { $addToSet: { thoughts: thought._id } },
           { new: true }
         );
       })
       .then((user) =>
         !user
           ? res.status(404).json({
-              message: 'Application created, but found no user with that ID',
+              message: 'Thought created, but found no user with that ID',
             })
-          : res.json('Created the application 🎉')
+          : res.json('Created the thought 🎉')
       )
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
   },
-  // TODO: Add comments to the functionality of the updateApplication method
+  
   updateApplication(req, res) {
     Application.findOneAndUpdate(
       { _id: req.params.applicationId },
