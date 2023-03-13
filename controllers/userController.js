@@ -57,4 +57,46 @@ module.exports = {
       .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
+
+  // Add a friend to a user
+  addFriend(req, res) {
+    console.log('You are adding a friend');
+    console.log(req.body);
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.params.friendId } },
+      { runValidators: true, new: true }
+    )
+      .then((user) =>
+        !user
+          ? res
+              .status(404)
+              .json({ message: 'No user found with that ID' })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // Remove a friend from a user
+  removeFriend(req, res) {
+    Student.findOneAndUpdate(
+      { _id: req.params.studentId },
+      { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
+      { runValidators: true, new: true }
+    )
+      .then((student) =>
+        !student
+          ? res
+              .status(404)
+              .json({ message: 'No student found with that ID :(' })
+          : res.json(student)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+
+
+
+
+
 };
