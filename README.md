@@ -83,8 +83,10 @@ Copy the following files and folder to your computer and test this application:
 ``` 
 
 ## SCREENSHOTS
-![image](https://user-images.githubusercontent.com/121307266/221103637-520c1d98-bf62-470f-8519-6a8afabad9a4.png)
-![image](https://user-images.githubusercontent.com/121307266/221103743-a7625722-9151-45ef-9770-3d6dcf517032.png)
+![image](https://user-images.githubusercontent.com/121307266/225153970-23b64d2c-dc81-4247-8fac-cdd6f5012821.png)
+![image](https://user-images.githubusercontent.com/121307266/225153976-ba6afa1d-40d7-48b8-96d4-caed8f88d16a.png)
+![image](https://user-images.githubusercontent.com/121307266/225153979-6d60377c-30b2-478b-af19-4da92bb017c6.png)
+![image](https://user-images.githubusercontent.com/121307266/225153980-c27a7f29-e942-4fa8-bb01-5140a863eeef.png)
 
 ## DEMO
 [Demo video](https://watch.screencastify.com/v/7AoV8iMDubhwxXQWCH0i)<br>
