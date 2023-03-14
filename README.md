@@ -1,12 +1,13 @@
 # Social Media Data API [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## DESCRIPTION 
-This application enables you to create and manage a backend system for a e-commerce website! You can do the following actions:
-* Create a database which contains data of products, product categories and product tags 
-* View list of categories (and associated products), list of tags (and associated products) or list of products (and an associated category and tags)
-* View information of specific category, tag or product
-* Update information on specific category, tag or product 
-* Delete specific category, tag or product from the database
+This application enables you to create and manage a social media platform where users can share their thoughts and leave reactions to other users' thoughts. Available operations include:
+* View user information (username, email address, list of thoughts/posts, list of friends and the number of friends) 
+* Create, update and delete users
+* Add and remove friends
+* View thought/post information (text, creation date, username, list of reactions which include text, username and creation date) 
+* Create, update and delete thoughts 
+* Create and delete reactions
 
 ## TABLE OF CONTENTS
 [INSTALLATION](#installation)<br>
