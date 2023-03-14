@@ -1,4 +1,4 @@
-# Challenge 13 - ORM : E-Commerce Back End System [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Social Media Data API [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## DESCRIPTION 
 This application enables you to create and manage a backend system for a e-commerce website! You can do the following actions:
