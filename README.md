@@ -22,9 +22,7 @@ This application enables you to create and manage a social media platform where 
 ## INSTALLATION 
 This application requires 1.JavaScript, 2.Node.JS (version 16, not the latest), 3.Node package manager and 4.Insomnia to run. In a blank folder, put necessary files (refer to the TESTS section for the details) and open the command line. In the command line, move to this folder and then type "npm install". Make sure that a folder called "node_modules" and a file called package-lock.json are created. Following libraries are used:
 * [express](https://www.npmjs.com/package/express)
-* [mysql2](https://www.npmjs.com/package/mysql2)
-* [sequelize](https://www.npmjs.com/package/sequelize)
-* [dotenv](https://www.npmjs.com/package/dotenv)
+* [mongoose](https://www.npmjs.com/package/mongoose)
 
 ## USAGE 
 ### Step 1. Data Preparation 
