@@ -25,24 +25,27 @@ This application requires 1.JavaScript, 2.Node.JS (version 16, not the latest), 
 * [mongoose](https://www.npmjs.com/package/mongoose)
 
 ## USAGE 
-### Step 1. Data Preparation 
-First you need to load your data onto MySQL server. Go to Command Line and go to the folder of this application which contains db folder and index.js. Once you're in the folder, type "mysql -u root" (if you get a server connection error, type "mysql.server start" first) and then you're ready to use MySQL. In MySQL, type "source db/schema.sql to create a database and you can exit MySQL by typing "quit" and hit Enter button. Then type "npm run seed" in Command Line to seed the data.  
 
-### Step 2. Data Management
-In Command Line, type "node server.js" and then you'll see a message "App listening on PORT 3001!". Go to Insomnia and request the following actions:
-#### Path
-* Categories: http://localhost:3001/api/categories
-* Tags: http://localhost:3001/api/tags
-* Products: http://localhost:3001/api/products
+### Command Line - Preparation
+In Command Line, type "npm start" and then you'll see a message "App listening on PORT 3001!". Go to Insomnia and request the following actions:
+
+#### Insomnia - Path
+* Users: http://localhost:3001/api/users/
+* Friends: http://localhost:3001/api/users/:userId/friends/
+* Thoughts: http://localhost:3001/api/thoughts/
+* Reactions: http://localhost:3001/api/thoughts/:thoughtId/reactions/
+
 #### Method
-* GET: to view data (you can add an ID number to the path like "/tags/2" if you would like to view specific data)
+* GET: to view data (you can add an ID at the end of the path like "/tags/2uyhsyiung6rt52x" if you would like to view specific data)
 * POST: to add new data 
-* PUT: to update existing data (you need to add an ID number to the path to specify the item)
-* DELETE: to delete data (you need to add an ID number to the path to specify the item)
+* PUT: to update existing data (you need to add an ID at the end of the path to specify the item)
+* DELETE: to delete data (you need to add an ID at the end of the path to specify the item)
+
 #### Inputs for POST and PUT
-* Category: {"category_name": "string"}
-* Tag: {"tag_name": "string"}
-* Product: {"product_name": "", "price": decimal, "stock": integer, "category_id": integer, "tagIds": [integer, integer, ...]}
+* User: {"username": "string", "email": "email"}
+* Friend: Nothing in the request body but add the friend's userId at the end of the path
+* Thought: {"thoughtText": "string", "username": "string", "userId": "string (ID)"}
+* Reaction: {"reactionBody": "string", "username": "string"}
 
 ## LICENSE 
 MIT:<br>
