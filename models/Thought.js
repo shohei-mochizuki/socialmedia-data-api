@@ -13,10 +13,12 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: d => d.split("T")[0],
     },
     username: {
       type: String,
       required: true,
+      get: upper,
     },
     reactions: [reactionSchema],
   },
@@ -37,6 +39,12 @@ thoughtSchema
   .get(function () {
     return this.reactions.length;
   });
+
+
+function upper (name) {
+  return name.toUpperCase();
+};
+
 
 // Initialize our Thought model
 const Thought = model('thought', thoughtSchema);
