@@ -3,15 +3,14 @@ const express = require('express');
 const db = require('./config/connection');
 const routes = require('./routes');
 
-// THIS IS OPTIONAL!!!
+// Optional
 const cwd = process.cwd();
 
 // Configure Express
 const PORT = 3001;
 const app = express();
 
-// THIS IS OPTIONAL!!!
-// Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
+// Optional - not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
 const activity = cwd.includes('01-Activities')
   ? cwd.split('/01-Activities/')[1]
   : cwd;
