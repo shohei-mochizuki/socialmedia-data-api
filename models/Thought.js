@@ -26,6 +26,7 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
@@ -38,12 +39,6 @@ thoughtSchema
   .get(function () {
     return this.reactions.length;
   });
-
-// thoughtSchema
-//   .methods
-//   .get(function (date) {
-//     return date.getMonth();
-//   });
 
 // Initialize our Thought model
 const Thought = model('thought', thoughtSchema);
