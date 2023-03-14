@@ -13,7 +13,10 @@ module.exports = {
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
-      .populate({ path: 'thoughts', select: '-__v' }) // Show details of thoughts instead of only showing IDs
+      .populate([
+        { path: 'thoughts', select: '-__v' },
+        { path: 'friends', select: '-__v' },
+      ]) // Show details of thoughts instead of only showing IDs
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user found with that ID' })
