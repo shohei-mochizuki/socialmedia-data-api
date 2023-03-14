@@ -18,7 +18,6 @@ const thoughtSchema = new Schema(
     username: {
       type: String,
       required: true,
-      get: upper,
     },
     reactions: [reactionSchema],
   },
@@ -40,10 +39,15 @@ thoughtSchema
     return this.reactions.length;
   });
 
+thoughtSchema
+  .path('username')
+  .get(function (username) {
+    return username.toUpperCase();
+  });
 
-function upper (name) {
-  return name.toUpperCase();
-};
+// function upper (name) {
+//   return name.toUpperCase();
+// };
 
 
 // Initialize our Thought model
