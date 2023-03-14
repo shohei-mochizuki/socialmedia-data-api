@@ -20,7 +20,7 @@ This application enables you to create and manage a social media platform where 
 [QUESTIONS](#questions)
 
 ## INSTALLATION 
-This application requires 1.JavaScript, 2.Node.JS (version 16, not the latest), 3.Node package manager and 4.Insomnia to run. In a blank folder, put necessary files (refer to the TESTS section for the details) and open the command line. In the command line, move to this folder and then type "npm install". Make sure that a folder called "node_modules" and a file called package-lock.json are created. Following libraries are used:
+This application requires 1.JavaScript, 2.Node.JS (version 16, not the latest), 3.Node package manager, 4.MongoDB, 5.MongoDB Compass and 6.Insomnia to run. In a blank folder, put necessary files (refer to the TESTS section for the details) and open the command line. In the command line, move to this folder and then type "npm install". Make sure that a folder called "node_modules" and a file called package-lock.json are created. Following libraries are used:
 * [express](https://www.npmjs.com/package/express)
 * [mongoose](https://www.npmjs.com/package/mongoose)
 
@@ -61,32 +61,23 @@ Copy the following files and folder to your computer and test this application:
 .
 ├── config/
 |   └── connection.js
-├── db/
-|   └── schema.sql
+├── controllers/
+|   ├── thoughtController.js
+|   └── userController.js
 ├── models/
-|   ├── Category.js
 |   ├── index.js
-|   ├── Product.js
-|   ├── ProductTag.js
-|   └── Tag.js
+|   ├── Reaction.js
+|   ├── Thought.js
+|   └── User.js
 ├── routes/
 |   ├── api/
-|   |   ├── category-routes.js
 |   |   ├── index.js
-|   |   ├── product-routes.js
-|   |   └── tag-routes.js
-|   └── index.js
-├── seeds/
-|   ├── category-seeds.js
-|   ├── index.js
-|   ├── product-seeds.js
-|   ├── product-tag-seeds.js
-|   └── tag-seeds.js
-├── .env         
-├── package.json  
-└── server.js
+|   |   ├── thoughtRoutes.js
+|   |   └── userRoutes.js
+|   └── index.js      
+├── index.js  
+└── package.json 
 ``` 
-.env: make your own env file with DB_NAME='ecommerce_db' DB_USER='your user name' DB_PASSWORD='your own password'
 
 ## SCREENSHOTS
 ![image](https://user-images.githubusercontent.com/121307266/221103637-520c1d98-bf62-470f-8519-6a8afabad9a4.png)
