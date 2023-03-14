@@ -17,12 +17,12 @@ const reactionSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
-      get: (date) => date.toLocaleDateString("en-US"),
+      default: Date.now, // Current date & time
+      get: (date) => date.toLocaleDateString("en-US"), // Format date to MM/DD/YYYY
     },
   },
   {
-    toJSON: {
+    toJSON: { // Make getters available
       getters: true,
     },
     id: false,

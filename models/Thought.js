@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
+const reactionSchema = require('./Reaction'); // Reaction is a subdocument of Thought
 
 // Schema to create Thought model
 const thoughtSchema = new Schema(
@@ -12,20 +12,18 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
-      get: (date) => date.toLocaleDateString("en-US"),
+      default: Date.now, // Current date & time
+      get: (date) => date.toLocaleDateString("en-US"), // Format date to MM/DD/YYYY
     },
     username: {
       type: String,
       required: true,
     },
-    reactions: [reactionSchema],
+    reactions: [reactionSchema], // Reaction is a subdocument of Thought
   },
-    // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
-    // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
   {
-    toJSON: {
-      virtuals: true,
+    toJSON: { // Make virtuals and getters available
+      virtuals: true, 
       getters: true,
     },
     id: false,
