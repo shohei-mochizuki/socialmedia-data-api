@@ -13,7 +13,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: d => d.split("T")[0],
+      get: (date) => date.toLocaleDateString("en-US"),
     },
     username: {
       type: String,
@@ -39,16 +39,11 @@ thoughtSchema
     return this.reactions.length;
   });
 
-thoughtSchema
-  .path('username')
-  .get(function (username) {
-    return username.toUpperCase();
-  });
-
-// function upper (name) {
-//   return name.toUpperCase();
-// };
-
+// thoughtSchema
+//   .methods
+//   .get(function (date) {
+//     return date.getMonth();
+//   });
 
 // Initialize our Thought model
 const Thought = model('thought', thoughtSchema);
