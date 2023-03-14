@@ -1,13 +1,16 @@
+// Import models
 const { Thought, User } = require('../models');
 
 module.exports = {
-  getThoughts(req, res) { // /api/thoughts
+  // GET /api/thoughts - View all thoughts
+  getThoughts(req, res) { 
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
 
-  getSingleThought(req, res) { // /api/thoughts/:thoughtId
+  // GET /api/thoughts/:thoughtId - View specific thought
+  getSingleThought(req, res) { 
     Thought.findOne({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
@@ -17,13 +20,14 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   
-  createThought(req, res) { // /api/thoughts
+  // POST /api/thoughts - Create new thought
+  createThought(req, res) {
     Thought.create(req.body)
-      .then((thought) => {
+      .then((thought) => { // After updating Thought document, update thoughts:[...] in User document as well
         return User.findOneAndUpdate(
           { _id: req.body.userId },
-          { $addToSet: { thoughts: thought._id } },
-          { new: true }
+          { $addToSet: { thoughts: thought._id } }, // Add an element to an array
+          { new: true } // Return the new data, not the original (= default)
         );
       })
       .then((user) =>
@@ -39,11 +43,12 @@ module.exports = {
       });
   },
   
-  updateThought(req, res) { // /api/thoughts/:thoughtId
+  // PUT /api/thoughts/:thoughtId - Update thought
+  updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
-      { runValidators: true, new: true }
+      { runValidators: true, new: true } // Validate new input & Return the new data, not the original (= default)
     )
       .then((thought) =>
         !thought
@@ -56,15 +61,16 @@ module.exports = {
       });
   },
 
-  deleteThought(req, res) { // /api/thoughts/:thoughtId
+  // DELETE /api/thoughts/:thoughtId - Delete thought
+  deleteThought(req, res) { 
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought found with this id' })
-          : User.findOneAndUpdate(
+          : User.findOneAndUpdate( // After updating Thought document, update thoughts:[...] in User document as well
               { thoughts: req.params.thoughtId },
-              { $pull: { thoughts: req.params.thoughtId } },
-              { new: true }
+              { $pull: { thoughts: req.params.thoughtId } }, // Remove an element from an array
+              { new: true } // Return the new data, not the original (= default)
             )
       )
       .then((user) =>
@@ -77,11 +83,12 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   
-  addReaction(req, res) { // /api/thoughts/:thoughtId/reactions
+  // POST /api/thoughts/:thoughtId/reactions - Add reaction
+  addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $addToSet: { reactions: req.body } },
-      { runValidators: true, new: true }
+      { $addToSet: { reactions: req.body } }, // Add an element to an array
+      { runValidators: true, new: true } // Validate new input & Return the new data, not the original (= default)
     )
       .then((thought) =>
         !thought
@@ -91,11 +98,12 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   
-  removeReaction(req, res) { // /api/thoughts/:thoughtId/reactions/:reactionId
+  // DELETE /api/thoughts/:thoughtId/reactions/:reactionId - Remove reaction
+  removeReaction(req, res) { // /
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reactions: { reactionId: req.params.reactionId } } },
-      { runValidators: true, new: true }
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },  // Remove an element from an array
+      { new: true } // Return the new data, not the original (= default)
     )
       .then((thought) =>
         !thought
